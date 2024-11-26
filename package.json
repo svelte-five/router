@@ -1,69 +1,81 @@
 {
-  "name": "@svelte-five/router",
-  "version": "0.1.0",
-  "description": "Svelte 5 router with SSR support.",
-  "repository": "https://github.com/svelte-five/router.git",
-  "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.umd.cjs"
-      },
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
-    }
-  },
-  "scripts": {
-    "lint": "eslint src",
-    "format:check": "prettier src --check",
-    "format": "prettier $(git diff --cached --name-only --diff-filter=ACMR src | sed 's| |\\\\ |g') --write --ignore-unknown",
-    "test": "vitest",
-    "build": "vite build",
-    "prepare": "husky || true",
-    "commit": "cz"
-  },
-  "files": [
-    "dist/*",
-    "package.json"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@eslint/js": "^9.15.0",
-    "@sveltejs/vite-plugin-svelte": "^5.0.1",
-    "@types/node": "^22.10.0",
-    "commitizen": "^4.3.1",
-    "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^9.15.0",
-    "esm-env": "^1.1.4",
-    "globals": "^15.12.0",
-    "husky": "^9.1.7",
-    "pkgroll": "^2.5.1",
-    "prettier": "3.3.3",
-    "regexparam": "^3.0.0",
-    "semantic-release": "24.1.0",
-    "svelte": "^5.2.8",
-    "typescript": "^5.7.2",
-    "typescript-eslint": "^8.16.0",
-    "vite": "^6.0.0",
-    "vite-plugin-dts": "^4.3.0",
-    "vitest": "^2.1.6"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "peerDependencies": {
-    "esm-env": "^1.1.4",
-    "regexparam": "^3.0.0",
-    "svelte": "^5.2.0"
-  }
+	"name": "@svelte-five/router",
+	"version": "0.1.0",
+	"description": "Svelte 5 router with SSR support.",
+	"repository": "https://github.com/svelte-five/router.git",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build && npm run package",
+		"preview": "vite preview",
+		"package": "svelte-kit sync && svelte-package && publint",
+		"prepublishOnly": "npm run package",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"format": "prettier --write .",
+		"lint": "prettier --check . && eslint .",
+		"test:unit": "vitest",
+		"test": "npm run test:unit -- --run",
+		"prepare": "husky || true",
+		"commit": "cz"
+	},
+	"files": [
+		"dist/*",
+		"!dist/**/*.test.*",
+		"!dist/**/*.spec.*",
+		"package.json"
+	],
+	"sideEffects": [
+		"**/*.css"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"license": "MIT",
+	"svelte": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.15.0",
+		"@types/node": "^22.10.0",
+		"commitizen": "^4.3.1",
+		"cz-conventional-changelog": "^3.3.0",
+		"esm-env": "^1.1.4",
+		"husky": "^9.1.7",
+		"pkgroll": "^2.5.1",
+		"regexparam": "^3.0.0",
+		"semantic-release": "24.1.0",
+		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/kit": "^2.0.0",
+		"@sveltejs/package": "^2.0.0",
+		"@sveltejs/vite-plugin-svelte": "^4.0.0",
+		"eslint": "^9.7.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-svelte": "^2.36.0",
+		"globals": "^15.0.0",
+		"prettier": "^3.3.2",
+		"prettier-plugin-svelte": "^3.2.6",
+		"publint": "^0.2.0",
+		"svelte": "^5.2.0",
+		"svelte-check": "^4.0.0",
+		"typescript": "^5.0.0",
+		"typescript-eslint": "^8.0.0",
+		"vite": "^5.0.11",
+		"vitest": "^2.0.4"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
+	},
+	"peerDependencies": {
+		"esm-env": "^1.1.4",
+		"regexparam": "^3.0.0",
+		"svelte": "^5.2.0"
+	}
 }
