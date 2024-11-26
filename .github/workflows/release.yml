@@ -11,6 +11,7 @@ env:
     NODE_ENV: production
     HUSKY: 0
     GITHUB_TOKEN: ${{ secrets.PERSONAL_PAT }}
+    NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 permissions:
     contents: write # to be able to publish a GitHub release
